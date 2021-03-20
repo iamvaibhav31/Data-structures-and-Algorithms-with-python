@@ -1,6 +1,6 @@
 # Data-structures-and-Algorithms-with-python
 
-In this repositry we are going study some algorithms and some important inbuild function in python how they work like array , linklist , deque etc  and made them by on .
+In this repositry we are going study some important algorithms and some important inbuild function in python and it functionality by build tham by on like array , linklist , deque etc.
 
 # DYNAMIC ARRAY IMPLIMENTATION 
 
