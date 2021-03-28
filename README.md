@@ -34,3 +34,10 @@ its size cannot be changed
 
 -> This ordering principle is sometimes called FIFO, first-in first-out. 
 
+# DEQUE IMPLEMENTATION
+
+-> Advertisements. A double-ended queue, or deque, has the feature of adding and removing elements from either end. The Deque module is a part of collections library. It has the methods for adding and removing elements which can be invoked directly with arguments.
+
+# LINKLIST IMPLEMENTATION
+
+-> A linked list is a sequence of data elements, which are connected together via links. Each data element contains a connection to another data element in form of a pointer. Python does not have linked lists in its standard library. We implement the concept of linked lists using the concept of nodes as discussed in the previous chapter. We have already seen how we create a node class and how to traverse the elements of a node. In this chapter we are going to study the types of linked lists known as singly linked lists. In this type of data structure there is only one link between any two data elements. We create such a list and create additional methods to insert, update and remove elements from the list.
