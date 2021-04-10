@@ -1,5 +1,3 @@
-
-
 """
 collision in hashig is when hash key(created by a hash funtion)is pointing to word the same index is cause a dataover writing in hashtable
 
@@ -10,6 +8,7 @@ we can handal the collision handling by using this two method:-
 
 """
 
+
 # METHOR - 1  (___ linear chaining ___)
 class linear_chaining_hashing(object): 
     def __init__(self):
@@ -17,106 +16,89 @@ class linear_chaining_hashing(object):
         self.array = [[] for i in range(self.length)]
     
     def hash_function(self , key):
-        
         sum = 0
         key = str(key)
-        
         for i in key:
             sum+=ord(i)
-        
         return sum % self.length
 
     def __setitem__(self , key , value):
-        
-        hash_fun_value = self.hash_function(key)
+        hash_key = self.hash_function(key)
         found = False
-        
-        for index , element in enumerate(self.array[hash_fun_value]):
+        for index , element in enumerate(self.array[hash_key]):
             if len(element) == 2 and element[0] == key:
-                self.array[hash_fun_value][index] = (key,value)
+                self.array[hash_key][index] = (key,value)
                 found = True
-
         if not found:
-            self.array[hash_fun_value].append((key,value))
+            self.array[hash_key].append((key,value))
 
     def __getitem__(self , key):
        
-       hash_fun_value = self.hash_function(key) 
        
-       for ele in self.array[hash_fun_value]:
+       hash_key = self.hash_function(key) 
+       
+       for ele in self.array[hash_key]:
            if  ele[0] == key:
                return ele[1]
        
 
     def __delitem__(self,key):
-        hash_fun_value = self.hash_function(key)
-        for index , element in enumerate(self.array[hash_fun_value]):
+        
+        hash_key = self.hash_function(key)
+        for index , element in enumerate(self.array[hash_key]):
             if element[0] == key:
-                del self.array[hash_fun_value][index]
+                del self.array[hash_key][index]
 
 
 
 # METHORD - 2 (___ linear probing ___)
 class linear_probing_hashing(object): 
+    
     def __init__(self):
         self.length = 100
         self.array = [None]*self.length 
 
     def hash_function(self , key):
-        
         sum = 0
         key = str(key)
-        
         for i in key:
             sum+=ord(i)
-        
         return sum % self.length
 
     def __setitem__(self , key , value):
-        
-        hash_fun_value = self.hash_function(key)
+        hash_key = self.hash_function(key)
         found = False
         while  not found:
-            if self.array[hash_fun_value] is not None:
-                if self.array[hash_fun_value][0] == key:
-                    self.array[hash_fun_value] = (key,value)
+            if self.array[hash_key] is not None:
+                if self.array[hash_key][0] == key:
+                    self.array[hash_key] = (key,value)
                     found = True
-                hash_fun_value += 1
+                hash_key += 1
             else:
-                self.array[hash_fun_value] = (key,value)
+                self.array[hash_key] = (key,value)
                 found = True
             
-        
-        
     def __getitem__(self , key):
-       
-       hash_fun_value = self.hash_function(key) 
+       hash_key = self.hash_function(key) 
        found = False
        while  not found:
-            if self.array[hash_fun_value] is not None:
-                if self.array[hash_fun_value][0] == key:
+            if self.array[hash_key] is not None:
+                if self.array[hash_key][0] == key:
                     found = True
-                    return self.array[hash_fun_value][1]
-                        
-                hash_fun_value += 1
+                    return self.array[hash_key][1]
+                hash_key += 1
             
-                        
-            
-
     def __delitem__(self,key):
-        hash_fun_value = self.hash_function(key) 
+        hash_key = self.hash_function(key) 
         found = False
         while  not found:
-            if self.array[hash_fun_value] is not None:
-                if self.array[hash_fun_value][0] == key:
+            if self.array[hash_key] is not None:
+                if self.array[hash_key][0] == key:
                     found = True
-                    self.array[hash_fun_value] = None
-                        
-                hash_fun_value += 1
+                    self.array[hash_key] = None
+                hash_key += 1
             
             
-                
-                
                 
 if __name__ == "__main__":
 
