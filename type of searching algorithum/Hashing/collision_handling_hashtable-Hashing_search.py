@@ -110,7 +110,7 @@ class linear_probing_hashing(object):
             if self.array[hash_fun_value] is not None:
                 if self.array[hash_fun_value][0] == key:
                     found = True
-                    del self.array[hash_fun_value]
+                    self.array[hash_fun_value] = None
                         
                 hash_fun_value += 1
             
