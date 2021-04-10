@@ -1,21 +1,22 @@
 
+
 """
-collision in hashig is when hash key(created by a hash funtion) is pointing to word the same index in which the data is alredy present is cause a dataover  writing in hashtable
+collision in hashig is when hash key(created by a hash funtion)is pointing to word the same index is cause a dataover writing in hashtable
 
 we can handal the collision handling by using this two method:-
-                    best case               worst case
-1. chaining           O(1)                      O(n)
-2. leaniar probing    O(1)                      O(1)
+                          best case               worst case
+1. linear chaining           O(1)                      O(n)
+2. linear probing            O(1)                      O(1)
 
 """
 
-# METHOR - 1 ( Chaining )
-class hashtable(object):
-    def __init__(self): # CREATIING A HASH TABLE
+# METHOR - 1  (___ linear chaining ___)
+class linear_chaining_hashing(object): 
+    def __init__(self):
         self.length = 100
         self.array = [[] for i in range(self.length)]
     
-    def hash_function(self , key): # HASH FUNCTION
+    def hash_function(self , key):
         
         sum = 0
         key = str(key)
@@ -23,19 +24,11 @@ class hashtable(object):
         for i in key:
             sum+=ord(i)
         
-        return sum % self.length  # RETURNING A HASH KEY
+        return sum % self.length
 
-    
-    
     def __setitem__(self , key , value):
         
-        """ 
-        
-        ADDING THE KEY VALUE PAIR IN A HASH TABLE USING HASH KEY
-        
-        """
-        
-        hash_fun_value = self.hash_function(key) # HASH KEY
+        hash_fun_value = self.hash_function(key)
         found = False
         
         for index , element in enumerate(self.array[hash_fun_value]):
@@ -46,17 +39,9 @@ class hashtable(object):
         if not found:
             self.array[hash_fun_value].append((key,value))
 
-    
-    
     def __getitem__(self , key):
-        
-        """
-        
-        GETTING THE VALUE USING THE KEY
-        
-        """
        
-       hash_fun_value = self.hash_function(key)  # HASH KEY
+       hash_fun_value = self.hash_function(key) 
        
        for ele in self.array[hash_fun_value]:
            if  ele[0] == key:
@@ -64,31 +49,94 @@ class hashtable(object):
        
 
     def __delitem__(self,key):
-        """
-        
-        DELETING THE ITEM IN THE HASH TABLE
-        
-        """
-        hash_fun_value = self.hash_function(key) # HASH KEY
+        hash_fun_value = self.hash_function(key)
         for index , element in enumerate(self.array[hash_fun_value]):
             if element[0] == key:
                 del self.array[hash_fun_value][index]
-    
-  
-    
 
+
+
+# METHORD - 2 (___ linear probing ___)
+class linear_probing_hashing(object): 
+    def __init__(self):
+        self.length = 100
+        self.array = [None]*self.length 
+
+    def hash_function(self , key):
+        
+        sum = 0
+        key = str(key)
+        
+        for i in key:
+            sum+=ord(i)
+        
+        return sum % self.length
+
+    def __setitem__(self , key , value):
+        
+        hash_fun_value = self.hash_function(key)
+        found = False
+        while  not found:
+            if self.array[hash_fun_value] is not None:
+                if self.array[hash_fun_value][0] == key:
+                    self.array[hash_fun_value] = (key,value)
+                    found = True
+                hash_fun_value += 1
+            else:
+                self.array[hash_fun_value] = (key,value)
+                found = True
+            
+        
+        
+    def __getitem__(self , key):
+       
+       hash_fun_value = self.hash_function(key) 
+       found = False
+       while  not found:
+            if self.array[hash_fun_value] is not None:
+                if self.array[hash_fun_value][0] == key:
+                    found = True
+                    return self.array[hash_fun_value][1]
+                        
+                hash_fun_value += 1
+            
+                        
+            
+
+    def __delitem__(self,key):
+        hash_fun_value = self.hash_function(key) 
+        found = False
+        while  not found:
+            if self.array[hash_fun_value] is not None:
+                if self.array[hash_fun_value][0] == key:
+                    found = True
+                    del self.array[hash_fun_value]
+                        
+                hash_fun_value += 1
+            
+            
+                
+                
+                
 if __name__ == "__main__":
 
-    h = hashtable()
-
+    h = linear_chaining_hashing()
+    f = linear_probing_hashing()
+    
+    f["abcde"] =131
+    f["987zi"] = 544564
+    f[1212312] =123124124
+    f["vaibhav"] = 21
+    f["qfiafhiaha"] = "sdfef"
+    f["abcde"] = 1324
+    print(f["987zi"])
+    del f["vaibhav"]
     h[1212312] =123124124
     h["vaibhav"] = 21
     h["qfiafhiaha"] = "sdfef"
-    h["march 6"] =131
-    h["march 17"] = 544564
-    print(h.hash_function("march 6"))
-    print(h.hash_function("march 17"))
-    print(h.hash_function("qfiafhiaha"))
-    print(h.hash_function("vaibhav"))
-    print(h[1212312])
+    h["abcde"] =131
+    h["987zi"] = 544564
+
+    
     print(h.array)
+    print(f.array)
