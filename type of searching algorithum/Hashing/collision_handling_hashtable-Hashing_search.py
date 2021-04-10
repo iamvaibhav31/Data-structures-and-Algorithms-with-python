@@ -1,6 +1,6 @@
 
 """
-collision in hashig is when hash key(created by a hash funtion) is pointing to word the same index is cause a dataover  writing in hashtable
+collision in hashig is when hash key(created by a hash funtion) is pointing to word the same index in which the data is alredy present is cause a dataover  writing in hashtable
 
 we can handal the collision handling by using this two method:-
                     best case               worst case
