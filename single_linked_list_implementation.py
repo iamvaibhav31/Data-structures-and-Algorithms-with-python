@@ -30,20 +30,32 @@ class Linkedlist:
         while (cur):
             print(cur.value)
             cur = cur.nextnode
-
-l = Linkedlist()
-
-l.appand(1)
-l.appand(2)
-l.appand(3)
-l.appand(4)
-l.appand(5)
-
-
-l.display()
+    def reverse(self):
+        previous = None
+        current = self.head
+        while current is not None:
+            next = current.nextnode
+            current.nextnode = previous
+            previous = current
+            current = next
+        self.head = previous
 
 
+if "__name__" == "__main__":  
+    l = Linkedlist()
 
+    l.appand(1)
+    l.appand(2)
+    l.appand(3)
+    l.appand(4)
+    l.appand(5)
+
+
+    l.display()
+    print("\n")
+    l.reverse()
+    print("\n")
+    l.display()
 
 
 """
